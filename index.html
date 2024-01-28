@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encriptador Challenge</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <img src="./images/Logo.png" alt="Logo de desencriptador">
+  </header>
+  <main>
+    <section class="plano-principal">
+      <textarea placeholder="Ingrese el texto aqui" class="texto-ingresado" id="texto-ingresado">
+      </textarea>
+      <div class=" panel-bajo">
+        <div>
+          <img src="./images/bi_exclamation-circle-fill.png" alt="icono de advertencia">
+          Solo letras minúsculas y sin acentos
+        </div>
+        <div class="botones">
+          <button id="btn-encriptar" class="btn btn-encriptar">Encriptar</button>
+          <button id="btn-desencriptar" class="btn btn-desencriptar">Desencriptar</button>
+        </div>
+      </div>
+    </section>
+    <section class="panel-secundario">
+      <img src="./images/Muñeco.png" alt="imagen" class="diamond">
+      <span id="sin-palabras">
+        <h2>Ningún mensaje fue encontrado</h2>
+        <p>Ingresa el texto que deseas encriptar o desencriptar.</p>
+      </span>
+      <p id="texto-resultado"></p>
+    </section>
+  </main>
+  <script src="app.js" defer></script>
+</body>
+
+</html>
