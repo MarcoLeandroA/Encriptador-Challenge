@@ -32,7 +32,7 @@ function encriptarTexto() {
     'u': 'ufat'
   };
   let textoUsuario = textoIngresado.value;
-  const textoModificado = textoUsuario.replace(/[aeiou]/g, vocal => reemplazoVocales[vocal.toLowerCase()] || vocal);
+  const textoModificado = textoUsuario.toLowerCase().replace(/[aeiou]/g, vocal => reemplazoVocales[vocal.toLowerCase()] || vocal);
   textoResultado.textContent = textoModificado;
 };
 
@@ -45,7 +45,7 @@ function desencriptarTexto() {
     'ufat': 'u'
   };
   let textoUsuario = textoIngresado.value;
-  const textoOriginal = textoUsuario.replace(/enter|imes|ai|ober|ufat/g, clave => reemplazoClaves[clave]);
+  const textoOriginal = textoUsuario.toLowerCase().replace(/enter|imes|ai|ober|ufat/g, clave => reemplazoClaves[clave]);
   textoResultado.textContent = textoOriginal;
 };
 
