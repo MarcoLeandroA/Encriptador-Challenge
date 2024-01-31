@@ -14,8 +14,8 @@
   </header>
   <main>
     <section class="plano-principal">
-      <textarea placeholder="Ingrese el texto aqui" class="texto-ingresado" id="texto-ingresado">
-      </textarea>
+      <textarea name="" cols="30" rows="10" placeholder="Ingrese el texto aqui" class="texto-ingresado"
+        id="texto-ingresado"></textarea>
       <div class=" panel-bajo">
         <div>
           <img src="./images/bi_exclamation-circle-fill.png" alt="icono de advertencia">
@@ -28,12 +28,17 @@
       </div>
     </section>
     <section class="panel-secundario">
-      <img src="./images/Muñeco.png" alt="imagen" class="diamond">
-      <span id="sin-palabras">
-        <h2>Ningún mensaje fue encontrado</h2>
-        <p>Ingresa el texto que deseas encriptar o desencriptar.</p>
-      </span>
-      <p id="texto-resultado"></p>
+      <div class="plano-diamante">
+        <div id="sin-palabras">
+          <img src="./images/Muñeco.png" alt="imagen" class="diamond">
+          <h2>Ningún mensaje fue encontrado</h2>
+          <p>Ingresa el texto que deseas encriptar o desencriptar.</p>
+        </div>
+        <p id="texto-resultado"></p>
+      </div>
+      <div class="copy-section">
+        <button class="btn button-copy" id="btn-copy">Copiar</button>
+      </div>
     </section>
   </main>
   <script src="app.js" defer></script>
