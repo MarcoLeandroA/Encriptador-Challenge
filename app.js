@@ -5,15 +5,16 @@ const btnDesencriptar = document.getElementById('btn-desencriptar');
 const textoVacio = document.getElementById('sin-palabras');
 const btnCopy = document.getElementById('btn-copy');
 
+function notify(message, color) {
+  Toastify({
+    text: message,
+    className: "info",
+    style: {
+      background: color,
+    }
+  }).showToast();
+}
 
-
-const reemplazoVocales = {
-  'e': 'enter',
-  'i': 'imes',
-  'a': 'ai',
-  'o': 'ober',
-  'u': 'ufat'
-};
 function quitarImagen() {
   if (textoResultado.textContent.length > 0) {
     textoVacio.style.display = 'none';
@@ -22,6 +23,13 @@ function quitarImagen() {
   }
 }
 function encriptarTexto() {
+  const reemplazoVocales = {
+    'e': 'enter',
+    'i': 'imes',
+    'a': 'ai',
+    'o': 'ober',
+    'u': 'ufat'
+  };
   let textoUsuario = textoIngresado.value;
   const textoModificado = textoUsuario.replace(/[aeiou]/g, vocal => reemplazoVocales[vocal.toLowerCase()] || vocal);
   textoResultado.textContent = textoModificado;
@@ -30,17 +38,18 @@ function encriptarTexto() {
 btnEncriptar.addEventListener('click', () => {
   encriptarTexto();
   quitarImagen();
+  notify('Encriptado con exito', '#03C988');
 });
 
-const reemplazoClaves = {
-  'enter': 'e',
-  'imes': 'i',
-  'ai': 'a',
-  'ober': 'o',
-  'ufat': 'u'
-};
 
 function desencriptarTexto() {
+  const reemplazoClaves = {
+    'enter': 'e',
+    'imes': 'i',
+    'ai': 'a',
+    'ober': 'o',
+    'ufat': 'u'
+  };
   let textoUsuario = textoIngresado.value;
   const textoOriginal = textoUsuario.replace(/enter|imes|ai|ober|ufat/g, clave => reemplazoClaves[clave]);
   textoResultado.textContent = textoOriginal;
@@ -49,6 +58,7 @@ function desencriptarTexto() {
 btnDesencriptar.addEventListener('click', () => {
   desencriptarTexto();
   quitarImagen();
+  notify('Desencriptado con exito', '#03C988');
 })
 
 function copyToClipboard(texto) {
@@ -56,6 +66,7 @@ function copyToClipboard(texto) {
 }
 btnCopy.addEventListener('click', () => {
   copyToClipboard(textoResultado.textContent);
+  notify('Copiado al portapapeles', '#7F8487');
 });
 
 
