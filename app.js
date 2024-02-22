@@ -15,8 +15,8 @@ function notify(message, color) {
   }).showToast();
 };
 
-function quitarImagen() {
-  if (textoResultado.textContent.length > 0) {
+function quitarImagen(state) {
+  if (textoResultado.textContent.length > 0 && state) {
     textoVacio.style.display = 'none';
   } else {
     textoVacio.style.display = 'block';
@@ -32,8 +32,14 @@ function encriptarTexto() {
     'u': 'ufat'
   };
   let textoUsuario = textoIngresado.value;
-  const textoModificado = textoUsuario.toLowerCase().replace(/[aeiou]/g, vocal => reemplazoVocales[vocal.toLowerCase()] || vocal);
-  textoResultado.textContent = textoModificado;
+
+  if (/^[^\w\s]+$/.test(textoUsuario) || /[0-9]/.test(textoUsuario) || !/[aeiou]/.test(textoUsuario)) {
+    notify('Ingrese solo letras minúsculas y sin acentos que incluyan vocales', '#ff0c43');
+  } else {
+    const textoModificado = textoUsuario.toLowerCase().replace(/[aeiou]/g, vocal => reemplazoVocales[vocal.toLowerCase()] || vocal);
+    textoResultado.textContent = textoModificado;
+    notify('Encriptado con exito', '#03C988');
+  }
 };
 
 function desencriptarTexto() {
@@ -45,8 +51,14 @@ function desencriptarTexto() {
     'ufat': 'u'
   };
   let textoUsuario = textoIngresado.value;
-  const textoOriginal = textoUsuario.toLowerCase().replace(/enter|imes|ai|ober|ufat/g, clave => reemplazoClaves[clave]);
-  textoResultado.textContent = textoOriginal;
+
+  if (/^[^\w\s]+$/.test(textoUsuario) || /[0-9]/.test(textoUsuario) || !/[aeiou]/.test(textoUsuario)) {
+    notify('Ingrese el texto encriptado', '#ff0c43');
+  } else {
+    const textoOriginal = textoUsuario.toLowerCase().replace(/enter|imes|ai|ober|ufat/g, clave => reemplazoClaves[clave]);
+    textoResultado.textContent = textoOriginal;
+    notify('Desencriptado con exito', '#03C988');
+  }
 };
 
 function copyToClipboard(texto) {
@@ -57,21 +69,27 @@ function limpiarTexto() {
   textoIngresado.value = '';
 }
 
+btnCopy.addEventListener('click', () => {
+  console.log(textoResultado.value)
+  if (textoResultado.textContent.length > 0) {
+    copyToClipboard(textoResultado.textContent);
+    notify('Copiado al portapapeles', '#7F8487');
+    textoResultado.textContent = '';
+    quitarImagen(false);
+  } else {
+    notify('No hay texto para copiar', '#ff0c43');
+  }
+});
+
 btnEncriptar.addEventListener('click', () => {
   encriptarTexto();
   limpiarTexto();
-  quitarImagen();
-  notify('Encriptado con exito', '#03C988');
+  quitarImagen(true);
+
 });
 
 btnDesencriptar.addEventListener('click', () => {
   desencriptarTexto();
   limpiarTexto();
-  quitarImagen();
-  notify('Desencriptado con exito', '#03C988');
-});
-
-btnCopy.addEventListener('click', () => {
-  copyToClipboard(textoResultado.textContent);
-  notify('Copiado al portapapeles', '#7F8487');
+  quitarImagen(true);
 });
