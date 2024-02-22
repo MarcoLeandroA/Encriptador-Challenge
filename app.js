@@ -70,7 +70,6 @@ function limpiarTexto() {
 }
 
 btnCopy.addEventListener('click', () => {
-  console.log(textoResultado.value)
   if (textoResultado.textContent.length > 0) {
     copyToClipboard(textoResultado.textContent);
     notify('Copiado al portapapeles', '#7F8487');
